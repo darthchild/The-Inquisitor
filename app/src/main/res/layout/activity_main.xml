@@ -8,6 +8,8 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <!-- test -->
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
