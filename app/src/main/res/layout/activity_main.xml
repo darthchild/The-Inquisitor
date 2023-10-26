@@ -6,26 +6,29 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context=".MainActivity">
-
-    <!-- test -->
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="The Inquisitor"
-        android:textSize="25sp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
         android:gravity="center"
+        android:text="The Inquisitor"
+        android:letterSpacing="0.04"
+        android:fontFamily="@font/coolvetica_rg"
+        android:textColor="@color/white"
+        android:textSize="55sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="30dp"
         />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        app:cardCornerRadius="8dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="1dp"
         android:background="@color/white"
         >
         <LinearLayout
@@ -37,6 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Welcome!"
+                android:fontFamily="@font/coolvetica_rg"
                 android:textSize="30sp"
                 android:textColor="#363A43"
                 android:textStyle="bold"
@@ -45,14 +49,44 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enter your Name!"
-                android:textSize="10sp"
+                android:text="Please enter your name"
+                android:textSize="18sp"
                 android:textColor="#7A8089"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:layout_marginTop="16dp"
                 />
+            
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_marginTop="20dp"
+                >
 
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="e.g. superman101"
+                    android:inputType="textCapWords"
+                    android:textColor="#36AA43"
+                    android:textColorHint="#7A8089"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/design_default_color_primary"
+                android:text="START"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+
+
+                />
+            
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
