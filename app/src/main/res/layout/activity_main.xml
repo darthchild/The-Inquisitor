@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@drawable/app_bg"
     android:orientation="vertical"
     android:gravity="center"
     tools:context=".MainActivity">
@@ -16,7 +16,7 @@
         android:text="The Inquisitor"
         android:letterSpacing="0.04"
         android:fontFamily="@font/coolvetica_rg"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="55sp"
         android:textStyle="bold"
         android:layout_marginBottom="30dp"
@@ -40,23 +40,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Welcome!"
+                android:letterSpacing="0.04"
                 android:fontFamily="@font/coolvetica_rg"
                 android:textSize="30sp"
                 android:textColor="#363A43"
                 android:textStyle="bold"
                 android:gravity="center"
             />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Please enter your name"
-                android:textSize="18sp"
-                android:textColor="#7A8089"
-                android:textStyle="bold"
-                android:gravity="center"
                 android:layout_marginTop="16dp"
-                />
-            
+                android:gravity="center"
+                android:text="Please enter your name"
+                android:textColor="#7A8089"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,14 +71,14 @@
                     android:hint="e.g. superman101"
                     android:inputType="textCapWords"
                     android:textColor="#36AA43"
-                    android:textColorHint="#7A8089"
-                    />
+                    android:textColorHint="#7A8089" />
 
             </com.google.android.material.textfield.TextInputLayout>
             
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:background="@color/design_default_color_primary"
                 android:text="START"
@@ -85,8 +86,9 @@
                 android:textSize="17sp"
 
 
+
                 />
-            
+
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
