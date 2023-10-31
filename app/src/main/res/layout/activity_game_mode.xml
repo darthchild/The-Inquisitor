@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="15dp"
+    tools:context="com.ekagra.theinquisitor.gameModeActivity">
+
+
+    <Button
+        android:id="@+id/historyMode"
+        android:layout_width="250dp"
+        android:textSize="25sp"
+        android:layout_height="30dp"
+        android:text="History"
+        
+        android:textAllCaps="false"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="172dp" />
+
+    <Button
+        android:id="@+id/techMode"
+        android:layout_width="250dp"
+        android:textSize="25sp"
+        android:layout_height="30dp"
+        android:text="Tech"
+        android:textAllCaps="false"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="332dp" />
+
+    <Button
+        android:id="@+id/riddleMode"
+        android:layout_width="250dp"
+        android:textSize="25sp"
+        android:layout_height="30dp"
+        android:text="Riddle Me This "
+        android:textAllCaps="false"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="248dp" />
+
+    <Button
+        android:id="@+id/mythoMode"
+        android:layout_width="250dp"
+        android:textSize="25sp"
+        android:layout_height="30dp"
+        android:text="Mythology"
+        android:textAllCaps="false"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="248dp" />
+</LinearLayout>

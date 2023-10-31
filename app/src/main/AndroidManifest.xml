@@ -13,10 +13,17 @@
         android:theme="@style/Theme.TheInquisitor"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name="com.ekagra.theinquisitor.gameModeActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.ekagra.theinquisitor.QuestionActivity"
+            android:exported="false"
+            android:label="@string/title_activity_question"
+            android:theme="@style/Theme.TheInquisitor" />
+        <activity
+            android:name="com.ekagra.theinquisitor.MainActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

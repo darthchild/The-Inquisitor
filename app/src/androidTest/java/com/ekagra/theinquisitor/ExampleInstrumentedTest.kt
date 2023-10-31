@@ -1,4 +1,4 @@
-package com.example.theinquisitor
+package com.ekagra.theinquisitor
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

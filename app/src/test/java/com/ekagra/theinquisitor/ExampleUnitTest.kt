@@ -1,4 +1,4 @@
-package com.example.theinquisitor
+package com.ekagra.theinquisitor
 
 import org.junit.Test
 
