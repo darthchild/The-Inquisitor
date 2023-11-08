@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shape xmlns:android="http://schemas.android.com/apk/res/android">
+        <solid android:color="#FFFFFF" /> <!-- Button background color -->
+        <corners android:radius="10dp" /> <!-- Adjust the radius for desired roundness -->
+    </shape>
+
+</selector>

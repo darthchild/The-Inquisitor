@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <dimen name="game_mode_text">
+        25sp
+    </dimen>
+
+    <dimen name="game_mode_width">
+        300dp
+    </dimen>
+
+    <dimen name="game_mode_height">
+        69dp
+    </dimen>
+
+</resources>

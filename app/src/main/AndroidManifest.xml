@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.en.theinquisitor"
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
@@ -13,15 +14,15 @@
         android:theme="@style/Theme.TheInquisitor"
         tools:targetApi="31">
         <activity
-            android:name="com.ekagra.theinquisitor.gameModeActivity"
+            android:name="com.en.theinquisitor.GameModeActivity"
             android:exported="false" />
         <activity
-            android:name="com.ekagra.theinquisitor.QuestionActivity"
+            android:name="com.en.theinquisitor.QuestionActivity"
             android:exported="false"
             android:label="@string/title_activity_question"
             android:theme="@style/Theme.TheInquisitor" />
         <activity
-            android:name="com.ekagra.theinquisitor.MainActivity"
+            android:name="com.en.theinquisitor.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>

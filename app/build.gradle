@@ -3,11 +3,21 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+configurations.all {
+    resolutionStrategy {
+        eachDependency {
+            if ((requested.group == "org.jetbrains.kotlin") && (requested.name.startsWith("kotlin-stdlib"))) {
+                useVersion("1.8.0")
+            }
+        }
+    }
+}
+
 android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.theinquisitor"
+        applicationId "com.en.theinquisitor"
         minSdk 22
         targetSdk 32
         versionCode 1
@@ -32,9 +42,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    namespace 'com.example.theinquisitor'
+    namespace 'com.en.theinquisitor'
     buildFeatures {
-        compose true
+        compose false
     }
     composeOptions {
         kotlinCompilerExtensionVersion '1.4.3'
