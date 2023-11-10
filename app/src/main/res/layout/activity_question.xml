@@ -22,7 +22,7 @@
             android:layout_margin="16dp"
             android:gravity="center"
             android:textSize="25sp"
-            android:textColor="@color/black"
+            android:textColor="#000000"
             tools:text="This is the question?"
             />
 
@@ -68,24 +68,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/default_option_border_bg"
+            android:background="@drawable/default_option_border"
             android:gravity="center"
             android:padding="15dp"
-            android:textSize="25sp"
-            android:textColor="@color/black"
-            tools:text="Alfie"
-            />
+            android:textColor="#555555"
+            android:textSize="22sp"
+            tools:text="Alfie" />
 
         <TextView
             android:id="@+id/tvOption2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/default_option_border_bg"
+            android:background="@drawable/default_option_border"
             android:gravity="center"
             android:padding="15dp"
-            android:textSize="25sp"
-            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textColor="#555555"
             tools:text="Heinrich"
             />
 
@@ -94,11 +93,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/default_option_border_bg"
+            android:background="@drawable/default_option_border"
             android:gravity="center"
             android:padding="15dp"
-            android:textSize="25sp"
-            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textColor="#555555"
             tools:text="Benedict"
             />
 
@@ -107,11 +106,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/default_option_border_bg"
+            android:background="@drawable/default_option_border"
             android:gravity="center"
             android:padding="15dp"
-            android:textSize="25sp"
-            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textColor="#555555"
             tools:text="Russovny"
             />
 
@@ -127,7 +126,7 @@
             android:text="Submit"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="30sp"
+            android:textSize="27sp"
 
             />
     </LinearLayout>

@@ -12,6 +12,7 @@
 
     <Button
         android:id="@+id/historyMode"
+        android:fontFamily="@font/coolvetica_rg"
         android:layout_width="@dimen/game_mode_width"
         android:textSize="@dimen/game_mode_text"
         android:layout_height="@dimen/game_mode_height"
@@ -23,6 +24,7 @@
 
     <Button
         android:id="@+id/techMode"
+        android:fontFamily="@font/coolvetica_rg"
         android:layout_width="@dimen/game_mode_width"
         android:textSize="@dimen/game_mode_text"
         android:layout_height="@dimen/game_mode_height"
@@ -34,6 +36,7 @@
 
     <Button
         android:id="@+id/riddleMode"
+        android:fontFamily="@font/coolvetica_rg"
         android:layout_width="@dimen/game_mode_width"
         android:textSize="@dimen/game_mode_text"
         android:layout_height="@dimen/game_mode_height"
@@ -45,6 +48,7 @@
 
     <Button
         android:id="@+id/mythoMode"
+        android:fontFamily="@font/coolvetica_rg"
         android:layout_width="@dimen/game_mode_width"
         android:textSize="@dimen/game_mode_text"
         android:layout_height="@dimen/game_mode_height"
