@@ -118,9 +118,21 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
             R.id.tvOption2 -> selectedOptionsView(bd.tvOption2, 1)
             R.id.tvOption3 -> selectedOptionsView(bd.tvOption3, 2)
             R.id.tvOption4 -> selectedOptionsView(bd.tvOption4, 3)
+
             R.id.btnSubmit -> {
                 // TODO "implement submit btn"
             }
+        }
+    }
+
+    private fun answerView(answer: Int, drawableView: Int){
+
+        when(answer){
+            1-> { bd.tvOption1.background = ContextCompat.getDrawable(this, drawableView) }
+            2-> { bd.tvOption2.background = ContextCompat.getDrawable(this, drawableView) }
+            3-> { bd.tvOption3.background = ContextCompat.getDrawable(this, drawableView) }
+            4-> { bd.tvOption4.background = ContextCompat.getDrawable(this, drawableView) }
+
         }
     }
 }
