@@ -68,10 +68,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/default_option_border"
+            android:background="@drawable/default_option_bg"
             android:gravity="center"
             android:padding="15dp"
-            android:textColor="#555555"
+            android:textColor="#4A4A4A"
             android:textSize="22sp"
             tools:text="Alfie" />
 
@@ -80,11 +80,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/default_option_border"
+            android:background="@drawable/default_option_bg"
             android:gravity="center"
             android:padding="15dp"
             android:textSize="22sp"
-            android:textColor="#555555"
+            android:textColor="#4A4A4A"
             tools:text="Heinrich"
             />
 
@@ -93,11 +93,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/default_option_border"
+            android:background="@drawable/default_option_bg"
             android:gravity="center"
             android:padding="15dp"
             android:textSize="22sp"
-            android:textColor="#555555"
+            android:textColor="#4A4A4A"
             tools:text="Benedict"
             />
 
@@ -106,11 +106,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/default_option_border"
+            android:background="@drawable/default_option_bg"
             android:gravity="center"
             android:padding="15dp"
             android:textSize="22sp"
-            android:textColor="#555555"
+            android:textColor="#4A4A4A"
             tools:text="Russovny"
             />
 

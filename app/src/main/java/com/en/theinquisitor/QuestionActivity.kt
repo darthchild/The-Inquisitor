@@ -1,6 +1,5 @@
 package com.en.theinquisitor
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.en.theinquisitor.databinding.ActivityQuestionBinding
 
@@ -48,7 +48,7 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
      * Displays the question and options for the current position in the quiz.
      **/
     private fun setQuestion() {
-
+        defaultOptionsView()
         // Gets the current position in the quiz & Sets the progress bar
         val currQuestion: Question = questionsList[currPosition - 1]
         /**
@@ -86,7 +86,7 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
             opt.setTextColor(Color.LTGRAY)
             opt.typeface = Typeface.DEFAULT
             opt.background = ContextCompat.getDrawable(
-                this, R.drawable.default_option_border
+                this, R.drawable.default_option_bg
             )
         }
     }
@@ -120,12 +120,47 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
             R.id.tvOption4 -> selectedOptionsView(bd.tvOption4, 3)
 
             R.id.btnSubmit -> {
-                // TODO "implement submit btn"
+                if(selectedOption == 0){
+                    currPosition++
+                    when{
+                        // if more Qs available, sets the Q
+                        currPosition <= questionsList.size ->{
+                            setQuestion()
+                        }
+                        else -> {
+                            Toast.makeText(this, "Game Finished Homeboy!", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                } else {
+                    val question = questionsList[currPosition -1]
+                    // when wrong option is selected
+                    if( question.correctAnswer != selectedOption){
+                        answerView(selectedOption, false)
+                    }
+                    // displays correct answer regardless
+                    answerView(question.correctAnswer, true)
+
+                    if(currPosition == questionsList.size){
+                        bd.btnSubmit.text = "Finish"
+                    } else {
+                        bd.btnSubmit.text = "Next Question"
+                    }
+                    // reassigning to default value
+                    selectedOption = 0
+                }
+
             }
         }
     }
 
-    private fun answerView(answer: Int, drawableView: Int){
+    private fun answerView(answer: Int, isCorrect: Boolean){
+        var drawableView = 0
+
+        drawableView = if(isCorrect){
+            R.drawable.correct_option_bg
+        } else {
+            R.drawable.wrong_option_bg
+        }
 
         when(answer){
             1-> { bd.tvOption1.background = ContextCompat.getDrawable(this, drawableView) }

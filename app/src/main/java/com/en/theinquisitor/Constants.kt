@@ -17,17 +17,17 @@ object Constants {
 
         val que2 = Question(
             1,
-            "Which country was part of Pakistan until 1971?",
+            "This is the next question",
             null,
-            "Afghanistan", "Bangladesh","Nepal", "India",
+            "Opt1", "Opt2","Opt3", "Opt4",
             2
         )
 
         val que3 = Question(
             1,
-            "Which country was part of Pakistan until 1971?",
+            "This is the next next question",
             null,
-            "Afghanistan", "Bangladesh","Nepal", "India",
+            "Opt0", "Opt2","Opt3", "Opt4",
             2
         )
 
