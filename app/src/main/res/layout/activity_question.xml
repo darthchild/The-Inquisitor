@@ -16,6 +16,22 @@
         android:padding="20dp">
 
         <TextView
+            android:id="@+id/tvScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/score_display_bg"
+            android:fontFamily="@font/coolvetica_rg"
+            android:gravity="center"
+            android:textSize="26sp"
+            android:textColor="#000000"
+            android:letterSpacing="0.05"
+            android:textStyle="bold"
+            tools:text="the Score: 0"
+            android:padding="6sp"
+            android:layout_marginBottom="70sp"
+            />
+
+        <TextView
             android:id="@+id/tvQuestion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,7 +87,7 @@
             android:background="@drawable/default_option_bg"
             android:gravity="center"
             android:padding="15dp"
-            android:textColor="#4A4A4A"
+            android:textColor="#323232"
             android:textSize="22sp"
             tools:text="Alfie" />
 
@@ -84,7 +100,7 @@
             android:gravity="center"
             android:padding="15dp"
             android:textSize="22sp"
-            android:textColor="#4A4A4A"
+            android:textColor="#323232"
             tools:text="Heinrich"
             />
 
@@ -97,7 +113,7 @@
             android:gravity="center"
             android:padding="15dp"
             android:textSize="22sp"
-            android:textColor="#4A4A4A"
+            android:textColor="#323232"
             tools:text="Benedict"
             />
 
@@ -110,12 +126,12 @@
             android:gravity="center"
             android:padding="15dp"
             android:textSize="22sp"
-            android:textColor="#4A4A4A"
+            android:textColor="#323232"
             tools:text="Russovny"
             />
 
         <Button
-            android:id="@+id/btnSubmit"
+            android:id="@+id/btn_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/coolvetica_rg"

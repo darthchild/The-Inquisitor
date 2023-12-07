@@ -1,21 +1,26 @@
 package com.en.theinquisitor
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.en.theinquisitor.databinding.ActivityQuestionBinding
 
+@SuppressLint("SetTextI18n")
 class QuestionActivity : AppCompatActivity(), OnClickListener {
 
     // GLOBAL VARIABLES
     private var currPosition: Int = 1
-    private var selectedOption: Int = 0
+    private var selectedOption: Int = 100 // arbitrary default value
+    private var score: Int = 0
     private lateinit var questionsList: ArrayList<Question>
     private lateinit var tvOptionsArray: Array<TextView>
     private lateinit var bd: ActivityQuestionBinding
@@ -24,18 +29,25 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // setting up View Binding
         bd = ActivityQuestionBinding.inflate(layoutInflater)
+        setContentView(bd.root)
+
         // array of all the option's TextView
         tvOptionsArray = arrayOf(bd.tvOption1, bd.tvOption2, bd.tvOption3, bd.tvOption4)
-        setContentView(bd.root)
+
+        //setting default score
+        bd.tvScore.text = "the Score: 0"
 
         questionsList = Constants.getQuestions()
         setQuestion()
 
-        // Makes the options Text View clickable
+        // Makes the options TVs & submit btn clickable
         for (option in tvOptionsArray) {
             option.setOnClickListener(this)
         }
+        bd.btnSubmit.setOnClickListener(this)
+
         /*
         (here "this" is QuestionActivity class we're exporting the
         onClickLis.. job to the class, which is already a OnClickLis..,
@@ -83,7 +95,7 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
         val options = arrayListOf(bd.tvOption1,bd.tvOption2,bd.tvOption3,bd.tvOption4)
         for(opt in options){
             // for custom color - Color.parseColor("#7A8089")
-            opt.setTextColor(Color.LTGRAY)
+            opt.setTextColor(Color.parseColor("#323232"))
             opt.typeface = Typeface.DEFAULT
             opt.background = ContextCompat.getDrawable(
                 this, R.drawable.default_option_bg
@@ -91,11 +103,19 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
         }
     }
 
+    private fun setScore(isCorrect: Boolean){
+        if(isCorrect){
+            score += 10
+        } else {
+            score -= 5
+        }
+        bd.tvScore.text = "the Score: $score"
+    }
+
     /**
      * Sets a different style to the option that has been clicked
      */
     private fun selectedOptionsView(tv: TextView, selectedOptionNum: Int){
-
         // first, set all options to default color
         defaultOptionsView()
         // sets the selectedOption global var as the option that has
@@ -104,8 +124,48 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
         tv.setTextColor(Color.BLACK)
         tv.setTypeface(tv.typeface, Typeface.BOLD)
         tv.background = ContextCompat.getDrawable(
-            this, R.drawable.selected_option_border
+            this, R.drawable.selected_option_bg
         )
+    }
+
+
+    private fun onSubmit(){
+        if(selectedOption == 100){
+            currPosition++
+            when{
+                // if more Qs available, sets the Q
+                currPosition <= questionsList.size ->{
+                    setQuestion()
+                }
+                else -> {
+                    Toast.makeText(this, "Game Finished Homeboy!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        } else {
+
+            val question = questionsList.get(currPosition -1)
+
+            // when WRONG option is selected
+            if( question.correctAnswer != selectedOption){
+                answerView(selectedOption, false)
+                setScore(false)
+            }
+            // when RIGHT option is selected
+            else {
+                setScore(true)
+            }
+
+            // displays correct answer anyway
+            answerView(question.correctAnswer, true)
+
+            if(currPosition == questionsList.size){
+                bd.btnSubmit.text = "Finish"
+            } else {
+                bd.btnSubmit.text = "Next Question"
+            }
+            // reassigning to default value
+            selectedOption = 100
+        }
     }
 
     /**
@@ -114,60 +174,24 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
     override fun onClick(view: View?) {
 
         when(view?.id){ // runs when the "view" is clicked
+
             R.id.tvOption1 -> selectedOptionsView(bd.tvOption1, 0)
             R.id.tvOption2 -> selectedOptionsView(bd.tvOption2, 1)
             R.id.tvOption3 -> selectedOptionsView(bd.tvOption3, 2)
             R.id.tvOption4 -> selectedOptionsView(bd.tvOption4, 3)
-
-            R.id.btnSubmit -> {
-                if(selectedOption == 0){
-                    currPosition++
-                    when{
-                        // if more Qs available, sets the Q
-                        currPosition <= questionsList.size ->{
-                            setQuestion()
-                        }
-                        else -> {
-                            Toast.makeText(this, "Game Finished Homeboy!", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                } else {
-                    val question = questionsList[currPosition -1]
-                    // when wrong option is selected
-                    if( question.correctAnswer != selectedOption){
-                        answerView(selectedOption, false)
-                    }
-                    // displays correct answer regardless
-                    answerView(question.correctAnswer, true)
-
-                    if(currPosition == questionsList.size){
-                        bd.btnSubmit.text = "Finish"
-                    } else {
-                        bd.btnSubmit.text = "Next Question"
-                    }
-                    // reassigning to default value
-                    selectedOption = 0
-                }
-
-            }
+            R.id.btn_submit -> onSubmit()
         }
     }
 
-    private fun answerView(answer: Int, isCorrect: Boolean){
-        var drawableView = 0
+    private fun answerView(answer: Int, isCorrect: Boolean) {
 
-        drawableView = if(isCorrect){
+        val drawableView: Int = if(isCorrect){
             R.drawable.correct_option_bg
-        } else {
+        }else{
             R.drawable.wrong_option_bg
         }
+        tvOptionsArray[answer].background = ContextCompat.getDrawable(this, drawableView)
 
-        when(answer){
-            1-> { bd.tvOption1.background = ContextCompat.getDrawable(this, drawableView) }
-            2-> { bd.tvOption2.background = ContextCompat.getDrawable(this, drawableView) }
-            3-> { bd.tvOption3.background = ContextCompat.getDrawable(this, drawableView) }
-            4-> { bd.tvOption4.background = ContextCompat.getDrawable(this, drawableView) }
-
-        }
     }
+
 }
