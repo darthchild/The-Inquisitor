@@ -8,11 +8,66 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.en.theinquisitor.databinding.ActivityQuestionBinding
+
+import android.content.Context
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteOpenHelper
+
+//class YourDatabaseHelper(context: Context) : SQLiteOpenHelper(context, "questions.db", null, 1) {
+//
+//    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+//        // Handle database upgrades here if needed
+//        // For simplicity, we'll drop and recreate the questions table in this example
+//        db.execSQL("DROP TABLE IF EXISTS questions")
+//        onCreate(db)
+//    }
+//
+//    override fun onCreate(db: SQLiteDatabase) {
+//        // No need to create or insert anything here since you've done it with DB Browser
+//    }
+//
+//    @SuppressLint("Range")
+//    fun getQuestions(): List<Question> {
+//        val questions = mutableListOf<Question>()
+//        val db = readableDatabase
+//
+//        // Query the questions table
+//        val cursor: Cursor = db.rawQuery("SELECT * FROM questions", null)
+//
+//        val columns = cursor.columnNames
+//        Log.d("ColumnNames", columns.joinToString())
+//
+//
+//        // Iterate through the cursor to retrieve questions
+//        while (cursor.moveToNext()) {
+//            val id = cursor.getInt(cursor.getColumnIndex("id"))
+//            val questionText = cursor.getString(cursor.getColumnIndex("question"))
+//            val image = cursor.getString(cursor.getColumnIndex("image"))
+//            val correctAnswer = cursor.getInt(cursor.getColumnIndex("theAnswer"))
+//            val option1 = cursor.getString(cursor.getColumnIndex("option1"))
+//            val option2 = cursor.getString(cursor.getColumnIndex("option2"))
+//            val option3 = cursor.getString(cursor.getColumnIndex("option3"))
+//            val option4 = cursor.getString(cursor.getColumnIndex("option4"))
+//
+//            // Create a Question object and add it to the list
+//            val question = Question(id, questionText, image, option1, option2, option3, option4, correctAnswer)
+//            questions.add(question)
+//        }
+//
+//        // Close the cursor and the database
+//        cursor.close()
+//        db.close()
+//
+//        return questions
+//    }
+//}
+
+
 
 @SuppressLint("SetTextI18n")
 class QuestionActivity : AppCompatActivity(), OnClickListener {
@@ -36,8 +91,12 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
         // array of all the option's TextView
         tvOptionsArray = arrayOf(bd.tvOption1, bd.tvOption2, bd.tvOption3, bd.tvOption4)
 
-        //setting default score
+        // sets default SCORE
         bd.tvScore.text = "the Score: 0"
+
+        // gets the GAME MODE
+        val receivedValue = intent.getIntExtra("gameMode", -1)
+        Log.d("gameModeValue","$receivedValue")
 
         questionsList = Constants.getQuestions()
         setQuestion()
@@ -57,12 +116,51 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
 
 
     /**
+     * Sets a different style to the option that has been clicked
+     */
+    private fun selectedOptionsView(tv: TextView, selectedOptionNum: Int){
+        // first, set all options to default color
+        defaultOptionsView()
+        // sets the selectedOption global var as the option that has been clicked
+        selectedOption = selectedOptionNum
+        tv.setTextColor(Color.BLACK)
+        tv.setTypeface(tv.typeface, Typeface.BOLD)
+        tv.background = ContextCompat.getDrawable(
+            this, R.drawable.selected_option_bg
+        )
+    }
+
+    /**
      * Displays the question and options for the current position in the quiz.
      **/
     private fun setQuestion() {
         defaultOptionsView()
+
+//        // Assuming you have TextViews with IDs questionTextView, option1TextView, option2TextView, option3TextView, option4TextView
+//        val questionTextView: TextView = findViewById(R.id.questionTextView)
+//        val option1TextView: TextView = findViewById(R.id.option1TextView)
+//        val option2TextView: TextView = findViewById(R.id.option2TextView)
+//        val option3TextView: TextView = findViewById(R.id.option3TextView)
+//        val option4TextView: TextView = findViewById(R.id.option4TextView)
+//
+//        // Get questions from the database
+//        val dbHelper = YourDatabaseHelper(context)
+//        val questions = dbHelper.getQuestions()
+//
+//        // Display the first question and options (modify as needed)
+//        if (questions.isNotEmpty()) {
+//            val firstQuestion = questions[0]
+//
+//            questionTextView.text = firstQuestion.questionText
+//            option1TextView.text = "1. ${firstQuestion.option1}"
+//            option2TextView.text = "2. ${firstQuestion.option2}"
+//            option3TextView.text = "3. ${firstQuestion.option3}"
+//            option4TextView.text = "4. ${firstQuestion.option4}"
+//        }
+
         // Gets the current position in the quiz & Sets the progress bar
         val currQuestion: Question = questionsList[currPosition - 1]
+
         /**
          * currQuestion is a element of questionsList, which is an array of elements
          * of type:Question, "Question" is a data class, which has properties
@@ -74,9 +172,9 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
         // Sets the Question & Options Text Views
         bd.tvQuestion.text = currQuestion.question
 
-        val optionContentArray = arrayOf(currQuestion.option1, currQuestion.option2, currQuestion.option3, currQuestion.option4)
+        val currOptionsArray = arrayOf(currQuestion.option1, currQuestion.option2, currQuestion.option3, currQuestion.option4)
         for(i in 0..3){
-            tvOptionsArray[i].text = optionContentArray[i]
+            tvOptionsArray[i].text = currOptionsArray[i]
         }
 
         // Sets the submit button's text
@@ -112,22 +210,6 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
         bd.tvScore.text = "the Score: $score"
     }
 
-    /**
-     * Sets a different style to the option that has been clicked
-     */
-    private fun selectedOptionsView(tv: TextView, selectedOptionNum: Int){
-        // first, set all options to default color
-        defaultOptionsView()
-        // sets the selectedOption global var as the option that has
-        // been clicked
-        selectedOption = selectedOptionNum
-        tv.setTextColor(Color.BLACK)
-        tv.setTypeface(tv.typeface, Typeface.BOLD)
-        tv.background = ContextCompat.getDrawable(
-            this, R.drawable.selected_option_bg
-        )
-    }
-
 
     private fun onSubmit(){
         if(selectedOption == 100){
@@ -142,8 +224,7 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
                 }
             }
         } else {
-
-            val question = questionsList.get(currPosition -1)
+            val question = questionsList[currPosition -1]
 
             // when WRONG option is selected
             if( question.correctAnswer != selectedOption){

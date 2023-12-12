@@ -5,7 +5,7 @@ object Constants {
     fun getQuestions(): ArrayList<Question> {
         val questionsList = ArrayList<Question>()
 
-        //"What country does this flag belong to"
+        // correctAnswer indexing starts from 0
 
         val que1 = Question(
             1,

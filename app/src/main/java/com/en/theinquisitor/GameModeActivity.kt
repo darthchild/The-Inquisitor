@@ -18,8 +18,10 @@ class GameModeActivity : AppCompatActivity() {
         val btnMytho: Button = findViewById(R.id.mythoMode)
 
         btnHistory.setOnClickListener{
-            val intent0 = Intent(this, QuestionActivity::class.java)
-            startActivity(intent0)  // starts the new intent
+            val intent = Intent(this, QuestionActivity::class.java)
+            val mode: Int = 1
+            intent.putExtra("gameMode", mode)
+            startActivity(intent)  // starts the new intent
             finish()
         }
 

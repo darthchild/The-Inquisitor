@@ -29,6 +29,12 @@ android {
         }
     }
 
+    sourceSets {
+        main {
+            assets.srcDirs = ['src/main/assets']
+        }
+    }
+
     buildFeatures{
         viewBinding true
     }
