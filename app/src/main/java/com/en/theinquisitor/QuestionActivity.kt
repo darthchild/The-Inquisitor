@@ -12,61 +12,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.en.theinquisitor.databinding.ActivityQuestionBinding
-
-import android.content.Context
-import android.database.Cursor
-import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteOpenHelper
-
-//class YourDatabaseHelper(context: Context) : SQLiteOpenHelper(context, "questions.db", null, 1) {
-//
-//    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-//        // Handle database upgrades here if needed
-//        // For simplicity, we'll drop and recreate the questions table in this example
-//        db.execSQL("DROP TABLE IF EXISTS questions")
-//        onCreate(db)
-//    }
-//
-//    override fun onCreate(db: SQLiteDatabase) {
-//        // No need to create or insert anything here since you've done it with DB Browser
-//    }
-//
-//    @SuppressLint("Range")
-//    fun getQuestions(): List<Question> {
-//        val questions = mutableListOf<Question>()
-//        val db = readableDatabase
-//
-//        // Query the questions table
-//        val cursor: Cursor = db.rawQuery("SELECT * FROM questions", null)
-//
-//        val columns = cursor.columnNames
-//        Log.d("ColumnNames", columns.joinToString())
-//
-//
-//        // Iterate through the cursor to retrieve questions
-//        while (cursor.moveToNext()) {
-//            val id = cursor.getInt(cursor.getColumnIndex("id"))
-//            val questionText = cursor.getString(cursor.getColumnIndex("question"))
-//            val image = cursor.getString(cursor.getColumnIndex("image"))
-//            val correctAnswer = cursor.getInt(cursor.getColumnIndex("theAnswer"))
-//            val option1 = cursor.getString(cursor.getColumnIndex("option1"))
-//            val option2 = cursor.getString(cursor.getColumnIndex("option2"))
-//            val option3 = cursor.getString(cursor.getColumnIndex("option3"))
-//            val option4 = cursor.getString(cursor.getColumnIndex("option4"))
-//
-//            // Create a Question object and add it to the list
-//            val question = Question(id, questionText, image, option1, option2, option3, option4, correctAnswer)
-//            questions.add(question)
-//        }
-//
-//        // Close the cursor and the database
-//        cursor.close()
-//        db.close()
-//
-//        return questions
-//    }
-//}
-
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 
 
 @SuppressLint("SetTextI18n")
@@ -79,12 +29,18 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
     private lateinit var questionsList: ArrayList<Question>
     private lateinit var tvOptionsArray: Array<TextView>
     private lateinit var bd: ActivityQuestionBinding
+    private lateinit var database : FirebaseDatabase
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // setting up View Binding
+        // Firebase Init
+        database = FirebaseDatabase.getInstance()
+
+        Log.d("gameModeValue","Hello")
+
+        // Setting up View Binding
         bd = ActivityQuestionBinding.inflate(layoutInflater)
         setContentView(bd.root)
 
@@ -136,27 +92,38 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
     private fun setQuestion() {
         defaultOptionsView()
 
-//        // Assuming you have TextViews with IDs questionTextView, option1TextView, option2TextView, option3TextView, option4TextView
-//        val questionTextView: TextView = findViewById(R.id.questionTextView)
-//        val option1TextView: TextView = findViewById(R.id.option1TextView)
-//        val option2TextView: TextView = findViewById(R.id.option2TextView)
-//        val option3TextView: TextView = findViewById(R.id.option3TextView)
-//        val option4TextView: TextView = findViewById(R.id.option4TextView)
-//
-//        // Get questions from the database
-//        val dbHelper = YourDatabaseHelper(context)
-//        val questions = dbHelper.getQuestions()
-//
-//        // Display the first question and options (modify as needed)
-//        if (questions.isNotEmpty()) {
-//            val firstQuestion = questions[0]
-//
-//            questionTextView.text = firstQuestion.questionText
-//            option1TextView.text = "1. ${firstQuestion.option1}"
-//            option2TextView.text = "2. ${firstQuestion.option2}"
-//            option3TextView.text = "3. ${firstQuestion.option3}"
-//            option4TextView.text = "4. ${firstQuestion.option4}"
-//        }
+        val gameMode = "historyMode"
+        val ref = database.reference.child("game_modes").child(gameMode).child("questions")
+
+        Log.d("gameModeValue","Hello")
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                Log.d("gameModeValue", "Entered event listener")
+                val questionsArray = mutableListOf<Question>()
+
+                for (questionSnapshot in dataSnapshot.children) {
+                    val question = questionSnapshot.getValue(Question::class.java)
+                    question?.let {
+                        questionsArray.add(it)
+                    }
+                }
+                // Now 'questionsArray' list contains all the questions for the specified game mode
+                // Handle the list of questions as needed
+
+                // Example: Print the questions to Logcat
+                for (q in questionsArray) {
+                    Log.d("gameModeValue", q.toString())
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle errors
+                Log.e("Firebase", "Error: ${databaseError.message}")
+            }
+        })
+
+
+
 
         // Gets the current position in the quiz & Sets the progress bar
         val currQuestion: Question = questionsList[currPosition - 1]

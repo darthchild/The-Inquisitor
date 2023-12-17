@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "630066138307",
+    "project_id": "theinquisitor-2f063",
+    "storage_bucket": "theinquisitor-2f063.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:630066138307:android:b84ced0181a9acb5bca676",
+        "android_client_info": {
+          "package_name": "com.en.theinquisitor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6-Vgzj9DbzaI2trT4JU6d_1f3HLyqjpY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
