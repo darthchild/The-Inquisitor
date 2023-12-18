@@ -26,10 +26,12 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
     private var currPosition: Int = 1
     private var selectedOption: Int = 100 // arbitrary default value
     private var score: Int = 0
+    private val questionsArray = mutableListOf<Question>()
+    private lateinit var gameMode: String
     private lateinit var questionsList: ArrayList<Question>
     private lateinit var tvOptionsArray: Array<TextView>
     private lateinit var bd: ActivityQuestionBinding
-    private lateinit var database : FirebaseDatabase
+    private lateinit var database: FirebaseDatabase
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,21 +40,19 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
         // Firebase Init
         database = FirebaseDatabase.getInstance()
 
-        Log.d("gameModeValue","Hello")
-
         // Setting up View Binding
         bd = ActivityQuestionBinding.inflate(layoutInflater)
         setContentView(bd.root)
+
+        // gets the GAME MODE, from previous activity
+        gameMode = intent.getStringExtra("gameMode")!!
+        Log.d("gameModeValue","$gameMode")
 
         // array of all the option's TextView
         tvOptionsArray = arrayOf(bd.tvOption1, bd.tvOption2, bd.tvOption3, bd.tvOption4)
 
         // sets default SCORE
         bd.tvScore.text = "the Score: 0"
-
-        // gets the GAME MODE
-        val receivedValue = intent.getIntExtra("gameMode", -1)
-        Log.d("gameModeValue","$receivedValue")
 
         questionsList = Constants.getQuestions()
         setQuestion()
@@ -92,64 +92,75 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
     private fun setQuestion() {
         defaultOptionsView()
 
-        val gameMode = "historyMode"
         val ref = database.reference.child("game_modes").child(gameMode).child("questions")
 
-        Log.d("gameModeValue","Hello")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                Log.d("gameModeValue", "Entered event listener")
-                val questionsArray = mutableListOf<Question>()
 
-                for (questionSnapshot in dataSnapshot.children) {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                for (questionSnapshot in snapshot.children) {
                     val question = questionSnapshot.getValue(Question::class.java)
                     question?.let {
                         questionsArray.add(it)
                     }
-                }
-                // Now 'questionsArray' list contains all the questions for the specified game mode
-                // Handle the list of questions as needed
+                } // Now 'questionsArray' list contains all the questions for the specified game mode
 
-                // Example: Print the questions to Logcat
                 for (q in questionsArray) {
-                    Log.d("gameModeValue", q.toString())
+                    Log.d("CHECK", q.toString())
                 }
+
+                // Gets question of the current position
+                val currQuestion = questionsArray[currPosition - 1]
+
+                // Sets the Question & Options Text Views
+                bd.tvQuestion.text = currQuestion.question
+                val currOptionsArray = arrayOf(currQuestion.option1, currQuestion.option2, currQuestion.option3, currQuestion.option4)
+                for(i in 0..3){
+                    tvOptionsArray[i].text = currOptionsArray[i]
+                }
+
+                // Sets the submit button's text
+                if(currPosition == questionsArray.size){
+                    bd.btnSubmit.text = "Finish"
+                } else {
+                    bd.btnSubmit.text = "Submit"
+                }
+
+                // Sets the progress bar
+                bd.progressBar.progress = currPosition
+                bd.tvProgress.text = "$currPosition/ ${bd.progressBar.max}"
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                // Handle errors
-                Log.e("Firebase", "Error: ${databaseError.message}")
+                val activityContext = this@QuestionActivity
+                Toast.makeText(
+                    activityContext,
+                    "Firebase Error: ${databaseError.message}",
+                    Toast.LENGTH_LONG).show()
             }
         })
 
 
-
-
-        // Gets the current position in the quiz & Sets the progress bar
-        val currQuestion: Question = questionsList[currPosition - 1]
-
-        /**
-         * currQuestion is a element of questionsList, which is an array of elements
-         * of type:Question, "Question" is a data class, which has properties
-         * like question,option1,option2..,correctAnswer
-         **/
-        bd.progressBar.progress = currPosition
-        bd.tvProgress.text = "$currPosition/ ${bd.progressBar.max}"
-
-        // Sets the Question & Options Text Views
-        bd.tvQuestion.text = currQuestion.question
-
-        val currOptionsArray = arrayOf(currQuestion.option1, currQuestion.option2, currQuestion.option3, currQuestion.option4)
-        for(i in 0..3){
-            tvOptionsArray[i].text = currOptionsArray[i]
-        }
-
-        // Sets the submit button's text
-        if(currPosition == questionsList.size){
-            bd.btnSubmit.text = "Finish"
-        } else {
-            bd.btnSubmit.text = "Submit"
-        }
+//        // Gets the current position in the quiz & Sets the progress bar
+//        val currQuestion: Question = questionsList[currPosition - 1]
+//
+//        bd.progressBar.progress = currPosition
+//        bd.tvProgress.text = "$currPosition/ ${bd.progressBar.max}"
+//
+//        // Sets the Question & Options Text Views
+//        bd.tvQuestion.text = currQuestion.question
+//
+//        val currOptionsArray = arrayOf(currQuestion.option1, currQuestion.option2, currQuestion.option3, currQuestion.option4)
+//        for(i in 0..3){
+//            tvOptionsArray[i].text = currOptionsArray[i]
+//        }
+//
+//        // Sets the submit button's text
+//        if(currPosition == questionsList.size){
+//            bd.btnSubmit.text = "Finish"
+//        } else {
+//            bd.btnSubmit.text = "Submit"
+//        }
     }
 
     /**
@@ -183,7 +194,7 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
             currPosition++
             when{
                 // if more Qs available, sets the Q
-                currPosition <= questionsList.size ->{
+                currPosition <= questionsArray.size ->{
                     setQuestion()
                 }
                 else -> {
@@ -191,7 +202,7 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
                 }
             }
         } else {
-            val question = questionsList[currPosition -1]
+            val question = questionsArray[currPosition -1]
 
             // when WRONG option is selected
             if( question.correctAnswer != selectedOption){

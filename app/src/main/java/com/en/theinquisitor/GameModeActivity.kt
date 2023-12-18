@@ -18,28 +18,34 @@ class GameModeActivity : AppCompatActivity() {
         val btnMytho: Button = findViewById(R.id.mythoMode)
 
         btnHistory.setOnClickListener{
-            val intent = Intent(this, QuestionActivity::class.java)
-            val mode: Int = 1
-            intent.putExtra("gameMode", mode)
-            startActivity(intent)  // starts the new intent
-            finish()
-        }
-
-        btnTech.setOnClickListener{
             val intent1 = Intent(this, QuestionActivity::class.java)
+            val mode: String = "history"
+            intent1.putExtra("gameMode", mode)
             startActivity(intent1)  // starts the new intent
             finish()
         }
 
-        btnRiddle.setOnClickListener{
+        btnTech.setOnClickListener{
             val intent2 = Intent(this, QuestionActivity::class.java)
-            startActivity(intent2)  // starts the new intent
+            val mode: String = "tech"
+            intent2.putExtra("gameMode", mode)
+            startActivity(intent2)
+            finish()
+        }
+
+        btnRiddle.setOnClickListener{
+            val intent3 = Intent(this, QuestionActivity::class.java)
+            val mode: String = "riddle"
+            intent3.putExtra("gameMode", mode)
+            startActivity(intent3)
             finish()
         }
 
         btnMytho.setOnClickListener{
-            val intent3 = Intent(this, QuestionActivity::class.java)
-            startActivity(intent3)  // starts the new intent
+            val intent4 = Intent(this, QuestionActivity::class.java)
+            val mode: String = "mytho"
+            intent4.putExtra("gameMode", mode)
+            startActivity(intent4)
             finish()
         }
 

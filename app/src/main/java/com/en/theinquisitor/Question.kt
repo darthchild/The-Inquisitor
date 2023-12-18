@@ -1,8 +1,5 @@
 package com.en.theinquisitor
 
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.ValueEventListener
-
 data class Question(
     val correctAnswer: Int,
     val id: Int,
@@ -10,7 +7,10 @@ data class Question(
     val option2: String,
     val option3: String,
     val option4: String,
-    val question: String,
-)
+    val question: String
+) {
+    // No-argument constructor for Firebase deserialization
+    constructor() : this(0,0,"","","","","")
+}
 
 // val image: String?,

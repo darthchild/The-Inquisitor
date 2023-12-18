@@ -17,7 +17,7 @@
 
         <TextView
             android:id="@+id/tvScore"
-            android:layout_width="wrap_content"
+            android:layout_width="170sp"
             android:layout_height="wrap_content"
             android:background="@drawable/score_display_bg"
             android:fontFamily="@font/coolvetica_rg"

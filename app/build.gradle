@@ -15,8 +15,8 @@ configurations.all {
 }
 
 android {
-    compileSdk 33
 
+    compileSdk 33
     defaultConfig {
         applicationId "com.en.theinquisitor"
         minSdk 22
