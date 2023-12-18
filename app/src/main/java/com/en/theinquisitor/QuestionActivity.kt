@@ -26,9 +26,8 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
     private var currPosition: Int = 1
     private var selectedOption: Int = 100 // arbitrary default value
     private var score: Int = 0
-    private val questionsArray = mutableListOf<Question>()
+    private val questionsList = mutableListOf<Question>()
     private lateinit var gameMode: String
-    private lateinit var questionsList: ArrayList<Question>
     private lateinit var tvOptionsArray: Array<TextView>
     private lateinit var bd: ActivityQuestionBinding
     private lateinit var database: FirebaseDatabase
@@ -54,7 +53,6 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
         // sets default SCORE
         bd.tvScore.text = "the Score: 0"
 
-        questionsList = Constants.getQuestions()
         setQuestion()
 
         // Makes the options TVs & submit btn clickable
@@ -101,16 +99,16 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
                 for (questionSnapshot in snapshot.children) {
                     val question = questionSnapshot.getValue(Question::class.java)
                     question?.let {
-                        questionsArray.add(it)
+                        questionsList.add(it)
                     }
-                } // Now 'questionsArray' list contains all the questions for the specified game mode
+                } // Now 'questionsList' list contains all the questions for the specified game mode
 
-                for (q in questionsArray) {
+                for (q in questionsList) {
                     Log.d("CHECK", q.toString())
                 }
 
                 // Gets question of the current position
-                val currQuestion = questionsArray[currPosition - 1]
+                val currQuestion = questionsList[currPosition - 1]
 
                 // Sets the Question & Options Text Views
                 bd.tvQuestion.text = currQuestion.question
@@ -120,7 +118,7 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
                 }
 
                 // Sets the submit button's text
-                if(currPosition == questionsArray.size){
+                if(currPosition == questionsList.size){
                     bd.btnSubmit.text = "Finish"
                 } else {
                     bd.btnSubmit.text = "Submit"
@@ -139,28 +137,6 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
                     Toast.LENGTH_LONG).show()
             }
         })
-
-
-//        // Gets the current position in the quiz & Sets the progress bar
-//        val currQuestion: Question = questionsList[currPosition - 1]
-//
-//        bd.progressBar.progress = currPosition
-//        bd.tvProgress.text = "$currPosition/ ${bd.progressBar.max}"
-//
-//        // Sets the Question & Options Text Views
-//        bd.tvQuestion.text = currQuestion.question
-//
-//        val currOptionsArray = arrayOf(currQuestion.option1, currQuestion.option2, currQuestion.option3, currQuestion.option4)
-//        for(i in 0..3){
-//            tvOptionsArray[i].text = currOptionsArray[i]
-//        }
-//
-//        // Sets the submit button's text
-//        if(currPosition == questionsList.size){
-//            bd.btnSubmit.text = "Finish"
-//        } else {
-//            bd.btnSubmit.text = "Submit"
-//        }
     }
 
     /**
@@ -194,7 +170,7 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
             currPosition++
             when{
                 // if more Qs available, sets the Q
-                currPosition <= questionsArray.size ->{
+                currPosition <= questionsList.size ->{
                     setQuestion()
                 }
                 else -> {
@@ -202,7 +178,7 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
                 }
             }
         } else {
-            val question = questionsArray[currPosition -1]
+            val question = questionsList[currPosition -1]
 
             // when WRONG option is selected
             if( question.correctAnswer != selectedOption){
