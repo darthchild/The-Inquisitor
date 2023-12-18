@@ -5,10 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     android:padding="15dp"
+    android:gravity="center_horizontal"
     tools:context="com.en.theinquisitor.GameModeActivity">
 
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/score_display_bg"
+        android:fontFamily="@font/coolvetica_rg"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:letterSpacing="0.05"
+        tools:text="superman101"
+        android:padding="6sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="61dp"
+        android:layout_marginBottom="120dp"
+        />
 
     <Button
         android:id="@+id/historyMode"

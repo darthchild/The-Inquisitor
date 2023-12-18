@@ -3,51 +3,51 @@ package com.en.theinquisitor
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import com.en.theinquisitor.R
+import android.util.Log
+import android.view.View
+import android.view.View.OnClickListener
+import com.en.theinquisitor.databinding.ActivityGameModeBinding
 
-class GameModeActivity : AppCompatActivity() {
+class GameModeActivity : AppCompatActivity(), OnClickListener {
+
+    private lateinit var userName: String
+    private lateinit var bd: ActivityGameModeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_game_mode)
+        bd = ActivityGameModeBinding.inflate(layoutInflater)
+        setContentView(bd.root)
 
-        val btnHistory: Button = findViewById(R.id.historyMode)
-        val btnTech: Button = findViewById(R.id.techMode)
-        val btnRiddle: Button = findViewById(R.id.riddleMode)
-        val btnMytho: Button = findViewById(R.id.mythoMode)
+        // Sets the username
+        userName = intent.getStringExtra("userName")!!
+        Log.d("SPQR","username is : $userName")
+        bd.tvUserName.text = userName
 
-        btnHistory.setOnClickListener{
-            val intent1 = Intent(this, QuestionActivity::class.java)
-            val mode: String = "history"
-            intent1.putExtra("gameMode", mode)
-            startActivity(intent1)  // starts the new intent
-            finish()
+        // Sets the onClickListener to all buttons
+        val gameModeArray = arrayOf(bd.historyMode,bd.mythoMode,bd.techMode,bd.riddleMode)
+        for(i in gameModeArray){
+            i.setOnClickListener(this)
         }
-
-        btnTech.setOnClickListener{
-            val intent2 = Intent(this, QuestionActivity::class.java)
-            val mode: String = "tech"
-            intent2.putExtra("gameMode", mode)
-            startActivity(intent2)
-            finish()
-        }
-
-        btnRiddle.setOnClickListener{
-            val intent3 = Intent(this, QuestionActivity::class.java)
-            val mode: String = "riddle"
-            intent3.putExtra("gameMode", mode)
-            startActivity(intent3)
-            finish()
-        }
-
-        btnMytho.setOnClickListener{
-            val intent4 = Intent(this, QuestionActivity::class.java)
-            val mode: String = "mytho"
-            intent4.putExtra("gameMode", mode)
-            startActivity(intent4)
-            finish()
-        }
-
     }
+
+    private fun sendForward(mode: String){
+
+        val intent = Intent(this, QuestionActivity::class.java)
+        intent.putExtra("gameMode",mode)
+        intent.putExtra("userName",userName)
+        startActivity(intent)  // starts the new intent
+        finish()
+    }
+
+    override fun onClick(view: View?){
+
+        when(view?.id){
+            R.id.historyMode -> sendForward("history")
+            R.id.techMode -> sendForward("tech")
+            R.id.riddleMode -> sendForward("riddle")
+            R.id.mythoMode -> sendForward("mytho")
+        }
+    }
+
 }

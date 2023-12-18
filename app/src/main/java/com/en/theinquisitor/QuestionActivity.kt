@@ -12,7 +12,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.en.theinquisitor.databinding.ActivityQuestionBinding
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -26,7 +25,7 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
     private var currPosition: Int = 1
     private var selectedOption: Int = 100 // arbitrary default value
     private var score: Int = 0
-    private val questionsList = mutableListOf<Question>()
+    private val questionsList = arrayListOf<Question>()
     private lateinit var gameMode: String
     private lateinit var tvOptionsArray: Array<TextView>
     private lateinit var bd: ActivityQuestionBinding
@@ -36,16 +35,20 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Firebase Init
+        // Firebase Initialization
         database = FirebaseDatabase.getInstance()
 
-        // Setting up View Binding
+        // Sets up View Binding
         bd = ActivityQuestionBinding.inflate(layoutInflater)
         setContentView(bd.root)
 
         // gets the GAME MODE, from previous activity
         gameMode = intent.getStringExtra("gameMode")!!
-        Log.d("gameModeValue","$gameMode")
+        Log.d("gameModeValue","gameMode")
+
+        // Sets the username
+        val userName = intent.getStringExtra("userName")!!
+        bd.tvUserName.text = userName
 
         // array of all the option's TextView
         tvOptionsArray = arrayOf(bd.tvOption1, bd.tvOption2, bd.tvOption3, bd.tvOption4)
@@ -88,12 +91,12 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
      * Displays the question and options for the current position in the quiz.
      **/
     private fun setQuestion() {
-        defaultOptionsView()
 
+        defaultOptionsView()
+        // Reference to Firebase's Realtime Database
         val ref = database.reference.child("game_modes").child(gameMode).child("questions")
 
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
-
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 for (questionSnapshot in snapshot.children) {
@@ -102,10 +105,6 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
                         questionsList.add(it)
                     }
                 } // Now 'questionsList' list contains all the questions for the specified game mode
-
-                for (q in questionsList) {
-                    Log.d("CHECK", q.toString())
-                }
 
                 // Gets question of the current position
                 val currQuestion = questionsList[currPosition - 1]
