@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         val etUserName: AppCompatEditText = findViewById(R.id.userName)
 
 
-
         btnStart.setOnClickListener{
 
             if(etUserName.text!!.isEmpty()){
@@ -36,6 +35,5 @@ class MainActivity : AppCompatActivity() {
                 Log.d("SPQR","got the name : $userName")
             }
         }
-
     }
 }
