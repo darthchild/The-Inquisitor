@@ -19,8 +19,6 @@ class MainActivity : AppCompatActivity() {
         val btnStart: Button = findViewById(R.id.btnStart)
         val etUserName: AppCompatEditText = findViewById(R.id.userName)
 
-
-
         btnStart.setOnClickListener{
 
             if(etUserName.text!!.isEmpty()){

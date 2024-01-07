@@ -17,13 +17,18 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
+// TODO:
+// <X> FIX: text cutting at the left & right edges
+// <?> FIX: absolute position for options & submit button,
+//      not to go up and down according to teh question text length
+// <X> FIX: quiz going on even after 10 Qs, no "finish" btn
 
 @SuppressLint("SetTextI18n")
 class QuestionActivity : AppCompatActivity(), OnClickListener {
 
     // GLOBAL VARIABLES
     private var currPosition: Int = 1
-    private var selectedOption: Int = 100 // arbitrary default value
+    private var selectedOption: Int = -1 // arbitrary default value
     private var score: Int = 0
     private val questionsList = arrayListOf<Question>()
     private lateinit var gameMode: String
@@ -99,6 +104,8 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
+                questionsList.clear()  // Clear the list before populating
+
                 for (questionSnapshot in snapshot.children) {
                     val question = questionSnapshot.getValue(Question::class.java)
                     question?.let {
@@ -117,9 +124,7 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
                 }
 
                 // Sets the submit button's text
-                if(currPosition == questionsList.size){
-                    bd.btnSubmit.text = "Finish"
-                } else {
+                if(currPosition < questionsList.size){
                     bd.btnSubmit.text = "Submit"
                 }
 
@@ -165,26 +170,31 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
 
 
     private fun onSubmit(){
-        if(selectedOption == 100){
+
+        // NO OPTION SELECTED
+        if(selectedOption == -1){
             currPosition++
-            when{
-                // if more Qs available, sets the Q
-                currPosition <= questionsList.size ->{
-                    setQuestion()
-                }
-                else -> {
-                    Toast.makeText(this, "Game Finished Homeboy!", Toast.LENGTH_SHORT).show()
-                }
+            Log.d("AAAA","$currPosition")
+
+            // if more Qs available, sets the Ques.
+            if (currPosition <= questionsList.size) {
+                setQuestion()
+            } else {
+                // Quiz finished
+                Toast.makeText(this, "Game Finished Homeboy!", Toast.LENGTH_SHORT).show()
             }
-        } else {
+
+        }
+        // OPTION SELECTED
+        else {
             val question = questionsList[currPosition -1]
 
-            // when WRONG option is selected
+            // when WRONG option selected
             if( question.correctAnswer != selectedOption){
                 answerView(selectedOption, false)
                 setScore(false)
             }
-            // when RIGHT option is selected
+            // when RIGHT option selected
             else {
                 setScore(true)
             }
@@ -192,13 +202,15 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
             // displays correct answer anyway
             answerView(question.correctAnswer, true)
 
-            if(currPosition == questionsList.size){
+            // sets the Submit btn text
+            if (currPosition == questionsList.size) {
                 bd.btnSubmit.text = "Finish"
             } else {
                 bd.btnSubmit.text = "Next Question"
             }
+
             // reassigning to default value
-            selectedOption = 100
+            selectedOption = -1
         }
     }
 

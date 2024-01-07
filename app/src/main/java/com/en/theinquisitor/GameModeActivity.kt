@@ -21,7 +21,6 @@ class GameModeActivity : AppCompatActivity(), OnClickListener {
 
         // Sets the username
         userName = intent.getStringExtra("userName")!!
-        Log.d("SPQR","username is : $userName")
         bd.tvUserName.text = userName
 
         // Sets the onClickListener to all buttons
@@ -31,6 +30,7 @@ class GameModeActivity : AppCompatActivity(), OnClickListener {
         }
     }
 
+    // method for sending data to the next Activity
     private fun sendForward(mode: String){
 
         val intent = Intent(this, QuestionActivity::class.java)

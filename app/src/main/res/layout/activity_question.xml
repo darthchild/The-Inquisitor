@@ -10,7 +10,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="30dp"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="20dp">
@@ -46,16 +48,15 @@
 
         <TextView
             android:id="@+id/tvQuestion"
-            android:layout_width="393dp"
+            android:layout_width="360dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:gravity="center"
-            android:textColor="#000000"
-            android:textSize="24sp"
             android:padding="2dp"
-            tools:text="This is the question eeee question question question question question?" />
+            android:textColor="#000000"
+            android:textSize="23sp"
+            tools:text="This is what we like to call a sample question, a sample question is something which" />
 
         <ImageView
             android:id="@+id/ivQuesImage"
@@ -97,24 +98,26 @@
         <TextView
             android:id="@+id/tvOption1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_margin="10dp"
             android:background="@drawable/default_option_bg"
             android:gravity="center"
             android:padding="15dp"
             android:textColor="#323232"
-            android:textSize="22sp"
+            android:textSize="21sp"
             tools:text="Alfie" />
 
         <TextView
             android:id="@+id/tvOption2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_margin="10dp"
             android:background="@drawable/default_option_bg"
             android:gravity="center"
             android:padding="15dp"
-            android:textSize="22sp"
+            android:textSize="21sp"
             android:textColor="#323232"
             tools:text="Heinrich"
             />
@@ -122,12 +125,13 @@
         <TextView
             android:id="@+id/tvOption3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_margin="10dp"
             android:background="@drawable/default_option_bg"
             android:gravity="center"
             android:padding="15dp"
-            android:textSize="22sp"
+            android:textSize="21sp"
             android:textColor="#323232"
             tools:text="Benedict"
             />
@@ -135,12 +139,13 @@
         <TextView
             android:id="@+id/tvOption4"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_margin="10dp"
             android:background="@drawable/default_option_bg"
             android:gravity="center"
             android:padding="15dp"
-            android:textSize="22sp"
+            android:textSize="21sp"
             android:textColor="#323232"
             tools:text="Russovny"
             />
