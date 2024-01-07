@@ -168,7 +168,6 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
         bd.tvScore.text = "the Score: $score"
     }
 
-
     private fun onSubmit(){
 
         // NO OPTION SELECTED
