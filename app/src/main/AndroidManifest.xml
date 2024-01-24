@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.en.theinquisitor"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.en.theinquisitor">
 
     <application
         android:allowBackup="true"
@@ -14,15 +14,26 @@
         android:theme="@style/Theme.TheInquisitor"
         tools:targetApi="31">
         <activity
-            android:name="com.en.theinquisitor.GameModeActivity"
+            android:name=".FinalActivity"
             android:exported="false" />
         <activity
-            android:name="com.en.theinquisitor.QuestionActivity"
+            android:name=".MainActivity2"
+            android:exported="false"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/Theme.TheInquisitor" />
+        <activity
+            android:name=".finishActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GameModeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuestionActivity"
             android:exported="false"
             android:label="@string/title_activity_question"
             android:theme="@style/Theme.TheInquisitor" />
         <activity
-            android:name="com.en.theinquisitor.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>

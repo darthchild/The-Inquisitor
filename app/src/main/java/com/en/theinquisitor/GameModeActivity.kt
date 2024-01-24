@@ -34,8 +34,8 @@ class GameModeActivity : AppCompatActivity(), OnClickListener {
     private fun sendForward(mode: String){
 
         val intent = Intent(this, QuestionActivity::class.java)
-        intent.putExtra("gameMode",mode)
-        intent.putExtra("userName",userName)
+        intent.putExtra("game_mode",mode)
+        intent.putExtra("user_name",userName)
         startActivity(intent)  // starts the new intent
         finish()
     }

@@ -1,6 +1,7 @@
 package com.en.theinquisitor
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
@@ -30,8 +31,11 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
     private var currPosition: Int = 1
     private var selectedOption: Int = -1 // arbitrary default value
     private var score: Int = 0
+    private var wrongAnswers: Int = 0
+    private var rightAnswers: Int = 0
     private val questionsList = arrayListOf<Question>()
     private lateinit var gameMode: String
+    private lateinit var userName: String
     private lateinit var tvOptionsArray: Array<TextView>
     private lateinit var bd: ActivityQuestionBinding
     private lateinit var database: FirebaseDatabase
@@ -48,11 +52,11 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
         setContentView(bd.root)
 
         // gets the GAME MODE, from previous activity
-        gameMode = intent.getStringExtra("gameMode")!!
+        gameMode = intent.getStringExtra("game_mode")!!
         Log.d("gameModeValue","gameMode")
 
-        // Sets the username
-        val userName = intent.getStringExtra("userName")!!
+        // Gets & sets the username
+        userName = intent.getStringExtra("user_name")!!
         bd.tvUserName.text = userName
 
         // array of all the option's TextView
@@ -180,7 +184,16 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
                 setQuestion()
             } else {
                 // Quiz finished
-                Toast.makeText(this, "Game Finished Homeboy!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Game Finished Homeboy! $rightAnswers/$wrongAnswers", Toast.LENGTH_SHORT).show()
+
+                // Sends data to next Activity
+                val intent = Intent(this, FinalActivity::class.java)
+                intent.putExtra("score",score)
+                intent.putExtra("user_name",userName)
+                intent.putExtra("wrong_answers",wrongAnswers)
+                intent.putExtra("right_answers",rightAnswers)
+                startActivity(intent)
+                finish()
             }
 
         }
@@ -192,10 +205,12 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
             if( question.correctAnswer != selectedOption){
                 answerView(selectedOption, false)
                 setScore(false)
+                wrongAnswers++
             }
             // when RIGHT option selected
             else {
                 setScore(true)
+                rightAnswers++
             }
 
             // displays correct answer anyway
