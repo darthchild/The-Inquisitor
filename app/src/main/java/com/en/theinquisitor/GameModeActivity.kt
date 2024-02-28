@@ -40,6 +40,8 @@ class GameModeActivity : AppCompatActivity(), OnClickListener {
         finish()
     }
 
+
+
     override fun onClick(view: View?){
 
         when(view?.id){
@@ -47,6 +49,11 @@ class GameModeActivity : AppCompatActivity(), OnClickListener {
             R.id.techMode -> sendForward("tech")
             R.id.riddleMode -> sendForward("riddle")
             R.id.mythoMode -> sendForward("mytho")
+        }
+
+        bd.btnBack.setOnClickListener {
+             // Navigate back to the previous screen
+            finish()
         }
     }
 

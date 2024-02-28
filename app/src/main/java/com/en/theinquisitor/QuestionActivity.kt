@@ -184,16 +184,16 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
                 setQuestion()
             } else {
                 // Quiz finished
-                Toast.makeText(this, "Game Finished Homeboy! $rightAnswers/$wrongAnswers", Toast.LENGTH_SHORT).show()
+                // Toast.makeText(this, "Game Finished Homeboy! $rightAnswers/$wrongAnswers", Toast.LENGTH_SHORT).show()
 
-                // Sends data to next Activity
-                val intent = Intent(this, FinalActivity::class.java)
-                intent.putExtra("score",score)
-                intent.putExtra("user_name",userName)
-                intent.putExtra("wrong_answers",wrongAnswers)
-                intent.putExtra("right_answers",rightAnswers)
-                startActivity(intent)
-                finish()
+                 //Sends data to next Activity
+                val intent1 = Intent(this, ResultActivity::class.java)
+                intent1.putExtra("score",score)
+                intent1.putExtra("user_name",userName)
+                intent1.putExtra("wrong_answers",wrongAnswers)
+                intent1.putExtra("right_answers",rightAnswers)
+                startActivity(intent1)
+                //finish()
             }
 
         }

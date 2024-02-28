@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity() {
                 val userName: String = etUserName.text.toString()
                 intent.putExtra("userName", userName)
                 startActivity(intent)  // starts the new intent
-                finish() // closes current activity (user wont be able to go back)
 
                 Log.d("SPQR","got the name : $userName")
             }

@@ -17,18 +17,36 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <TextView
-            android:id="@+id/tvUserName"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20sp"
-            android:background="@drawable/score_display_bg"
-            android:fontFamily="@font/coolvetica_rg"
-            android:letterSpacing="0.05"
-            android:padding="6sp"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            tools:text="superman101" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="70dp">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/arrow_back_black"
+                android:background="@null"
+                android:layout_weight="0"
+                android:layout_marginEnd="90dp"
+                />
+
+            <TextView
+                android:id="@+id/tvUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/score_display_bg"
+                android:fontFamily="@font/coolvetica_rg"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:letterSpacing="0.05"
+                tools:text="superman101"
+                android:padding="6sp"
+
+                />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tvScore"

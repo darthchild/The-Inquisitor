@@ -14,15 +14,7 @@
         android:theme="@style/Theme.TheInquisitor"
         tools:targetApi="31">
         <activity
-            android:name=".FinalActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity2"
-            android:exported="false"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/Theme.TheInquisitor" />
-        <activity
-            android:name=".finishActivity"
+            android:name=".ResultActivity"
             android:exported="false" />
         <activity
             android:name=".GameModeActivity"
