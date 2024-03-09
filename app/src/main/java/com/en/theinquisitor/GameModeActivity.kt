@@ -24,8 +24,8 @@ class GameModeActivity : AppCompatActivity(), OnClickListener {
         bd.tvUserName.text = userName
 
         // Sets the onClickListener to all buttons
-        val gameModeArray = arrayOf(bd.historyMode,bd.mythoMode,bd.techMode,bd.riddleMode)
-        for(i in gameModeArray){
+        val allButtonsArray = arrayOf(bd.historyMode,bd.mythoMode,bd.techMode,bd.riddleMode,bd.btnBack)
+        for(i in allButtonsArray){
             i.setOnClickListener(this)
         }
     }
@@ -40,8 +40,6 @@ class GameModeActivity : AppCompatActivity(), OnClickListener {
         finish()
     }
 
-
-
     override fun onClick(view: View?){
 
         when(view?.id){
@@ -49,12 +47,7 @@ class GameModeActivity : AppCompatActivity(), OnClickListener {
             R.id.techMode -> sendForward("tech")
             R.id.riddleMode -> sendForward("riddle")
             R.id.mythoMode -> sendForward("mytho")
-        }
-
-        bd.btnBack.setOnClickListener {
-             // Navigate back to the previous screen
-            finish()
+            R.id.btnBack -> finish()
         }
     }
-
 }

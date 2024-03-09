@@ -19,15 +19,21 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
 // TODO:
+// <> Change last History question, add other mode questions
+// <X> The username card should be place more upwards
+// <X> The options button scale up and are taking too much width (vertical)
+// < > Phone's status bar not being displayed
+// <X> Add Back button
 // <X> FIX: text cutting at the left & right edges
 // <?> FIX: absolute position for options & submit button,
-//      not to go up and down according to teh question text length
+//      not to go up and down according to the question text length
 // <X> FIX: quiz going on even after 10 Qs, no "finish" btn
 
 @SuppressLint("SetTextI18n")
 class QuestionActivity : AppCompatActivity(), OnClickListener {
 
     // GLOBAL VARIABLES
+    
     private var currPosition: Int = 1
     private var selectedOption: Int = -1 // arbitrary default value
     private var score: Int = 0
@@ -72,6 +78,7 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
             option.setOnClickListener(this)
         }
         bd.btnSubmit.setOnClickListener(this)
+        bd.btnBack.setOnClickListener(this)
 
         /*
         (here "this" is QuestionActivity class we're exporting the
@@ -240,6 +247,7 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
             R.id.tvOption3 -> selectedOptionsView(bd.tvOption3, 2)
             R.id.tvOption4 -> selectedOptionsView(bd.tvOption4, 3)
             R.id.btn_submit -> onSubmit()
+            R.id.btnBack -> finish()
         }
     }
 
@@ -253,5 +261,4 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
         tvOptionsArray[answer].background = ContextCompat.getDrawable(this, drawableView)
 
     }
-
 }

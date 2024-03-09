@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -34,5 +35,25 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle menu item clicks here if needed
+        when (item.itemId) {
+            R.id.optSettings -> {
+                // Handle option 1 click
+                return true
+            }
+            R.id.optAbout -> {
+                // Handle option 2 click
+                return true
+            }
+            R.id.optPrivacy -> {
+                // Handle option 3 click
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 }
