@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ResultActivity">
+    tools:context=".ResultActivity"
+    android:background="#ffffff">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -20,6 +21,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:navigationIcon="@drawable/arrow_back_black"
+                android:background="@color/white"
+                android:elevation="5dp"
                 app:menu="@menu/main_menu">
 
             </com.google.android.material.appbar.MaterialToolbar>
@@ -43,11 +46,19 @@
         android:layout_gravity="center"
         />
 
+    <ImageView
+        android:layout_width="450px"
+        android:layout_height="450px"
+        android:contentDescription="logo"
+        android:layout_marginTop="100px"
+        android:layout_gravity="center"
+        android:src="@drawable/rose_sword"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/coolvetica_rg"
         android:text="Congratulations!"
         android:textColor="@color/black"
@@ -64,59 +75,79 @@
         android:fontFamily="@font/coolvetica_rg"
         android:letterSpacing="0.04"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
         android:textSize="20sp"
         />
 
-    <TextView
-        android:id="@+id/tvScore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/coolvetica_rg"
-        android:letterSpacing="0.06"
-        android:textStyle="bold"
-        tools:text="SCORE: 25"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="35dp"
-        android:layout_marginBottom="10dp"
-        android:textSize="25sp"
-        />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginBottom="25dp">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_height="115dp"
+        android:paddingTop="30dp"
+        android:layout_width="300dp"
+        app:cardCornerRadius="10dp"
+        android:layout_gravity="center"
+        app:cardBackgroundColor="@color/white"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        app:cardElevation="2dp"
+        app:strokeColor="#757575"
+        >
 
         <TextView
-            android:id="@+id/tvRight"
+            android:id="@+id/tvScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Right Qs: 5"
             android:fontFamily="@font/coolvetica_rg"
-            android:letterSpacing="0.06"
-            android:textColor="#05970A"
+            android:letterSpacing="0.07"
+            android:textColor="#0E0E0E"
+            android:textStyle="bold"
+            tools:text="Score: 25"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="28sp"
             />
 
-        <TextView
-            android:id="@+id/tvWrong"
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Wrong Qs: 2"
-            android:fontFamily="@font/coolvetica_rg"
-            android:letterSpacing="0.06"
-            android:textColor="#EA0C0C"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:textSize="18sp"
-            />
+            android:orientation="vert"
+            android:gravity="center"
+            android:layout_marginTop="65dp">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tvRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Right Qs: 5"
+                android:fontFamily="@font/coolvetica_rg"
+                android:letterSpacing="0.06"
+                android:textColor="#05970A"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:textSize="18sp"
+                />
+
+            <TextView
+                android:id="@+id/tvWrong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Wrong Qs: 2"
+                android:fontFamily="@font/coolvetica_rg"
+                android:letterSpacing="0.06"
+                android:textColor="#EA0C0C"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
 
 
     <com.google.android.material.button.MaterialButton
@@ -124,7 +155,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="25dp"
         android:text="Finish"
         android:fontFamily="@font/coolvetica_rg"
         android:textSize="24sp"

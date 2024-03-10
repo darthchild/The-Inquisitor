@@ -28,6 +28,8 @@ class GameModeActivity : AppCompatActivity(), OnClickListener {
         for(i in allButtonsArray){
             i.setOnClickListener(this)
         }
+
+        bd.tvGameModeSelect.text = "Choose a Game Mode!"
     }
 
     // method for sending data to the next Activity

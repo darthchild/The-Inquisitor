@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatEditText
 import com.en.theinquisitor.R
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
+    // handles the menu options
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle menu item clicks here if needed
         when (item.itemId) {
@@ -46,7 +46,13 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             R.id.optAbout -> {
-                // Handle option 2 click
+                MaterialAlertDialogBuilder(this)
+                    .setTitle("About")
+                    .setMessage("Developed by Ekagra Nigam\n Version: 1.0.0.1")
+                    .setNeutralButton("Close") { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    .show()
                 return true
             }
             R.id.optPrivacy -> {

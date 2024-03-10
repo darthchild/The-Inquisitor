@@ -73,7 +73,7 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
 
         setQuestion()
 
-        // Makes the options TVs & submit btn clickable
+        // Makes the options TVs,submit,back btn clickable
         for (option in tvOptionsArray) {
             option.setOnClickListener(this)
         }

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F3F3F3"
     android:orientation="vertical"
     android:fillViewport="true"
     tools:context="com.en.theinquisitor.QuestionActivity">
@@ -20,8 +21,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="40dp">
+            android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/btnBack"
@@ -63,26 +63,60 @@
             android:textStyle="bold"
             tools:text="the Score: 0"
             android:padding="6sp"
-            android:layout_marginTop="-10dp"
-            android:layout_marginBottom="60sp"
+            android:layout_marginTop="-20dp"
             />
+
 
         <TextView
             android:id="@+id/tvQuestion"
             android:layout_width="360dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-35dp"
+            android:layout_marginTop="30dp"
             android:gravity="center"
             android:padding="2dp"
             android:textColor="#000000"
             android:textSize="21sp"
             tools:text="This is what we like to call a sample question, a sample question is something which" />
 
-        <ImageView
-            android:id="@+id/ivQuesImage"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="-15dp">
+
+
+            <ImageView
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:contentDescription="logo"
+                android:layout_gravity="center"
+                android:src="@drawable/circumpunct"/>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="32dp"
+                android:contentDescription="logo"
+                android:layout_gravity="center"
+                android:src="@drawable/diamond1"/>
+
+            <ImageView
+                android:layout_width="53dp"
+                android:layout_height="53dp"
+                android:contentDescription="logo"
+                android:layout_gravity="center"
+                android:layout_marginStart="-5dp"
+                android:src="@drawable/cross"/>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="logo"
+                android:layout_gravity="center"
+                android:layout_marginStart="-5dp"
+                android:src="@drawable/fencing_symbol"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
