@@ -20,13 +20,15 @@ import com.google.firebase.database.ValueEventListener
 
 // TODO:
 // <> Change last History question, add other mode questions
+// <> add About & version dialog
+// <> make mockup settings screen
+// < > Phone's status bar not being displayed
+// <?> FIX: absolute position for options & submit button, not readjust rel to Ques. length
+
 // <X> The username card should be place more upwards
 // <X> The options button scale up and are taking too much width (vertical)
-// < > Phone's status bar not being displayed
 // <X> Add Back button
 // <X> FIX: text cutting at the left & right edges
-// <?> FIX: absolute position for options & submit button,
-//      not to go up and down according to the question text length
 // <X> FIX: quiz going on even after 10 Qs, no "finish" btn
 
 @SuppressLint("SetTextI18n")
@@ -43,7 +45,7 @@ class QuestionActivity : AppCompatActivity(), OnClickListener {
     private lateinit var gameMode: String
     private lateinit var userName: String
     private lateinit var tvOptionsArray: Array<TextView>
-    private lateinit var bd: ActivityQuestionBinding
+    private lateinit var bd:ActivityQuestionBinding
     private lateinit var database: FirebaseDatabase
 
 
